@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Découvrez les produits de SmartShop, votre boutique en ligne.">
+
+    <title>SmartShop | Boutique en ligne</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+    <!-- EN-TÊTE -->
+    <header class="header">
+        <div class="container header-content">
+
+            <a href="#" class="logo">Smart<span>Shop</span></a>
+
+            <nav class="navigation">
+                <a href="#accueil">Accueil</a>
+                <a href="#catalogue">Nos produits</a>
+            </nav>
+
+            <button class="cart-button" id="open-cart" type="button">
+                🛒 Panier
+                <span id="cart-count">0</span>
+            </button>
+
+        </div>
+    </header>
+
+    <main>
+
+        <!-- SECTION ACCUEIL -->
+        <section class="hero" id="accueil">
+            <div class="container hero-content">
+
+                <div class="hero-text">
+                    <p class="hero-label">BIENVENUE CHEZ SMARTSHOP</p>
+
+                    <h1>Le shopping en ligne, <span>en toute simplicité.</span></h1>
+
+                    <p>
+                        Découvrez notre sélection de produits et trouvez
+                        facilement ce dont vous avez besoin.
+                    </p>
+
+                    <a href="#catalogue" class="primary-button">
+                        Découvrir nos produits →
+                    </a>
+                </div>
+
+                <div class="hero-visual">
+                    <span>🛍️</span>
+                    <p>Vos envies, notre sélection.</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION CATALOGUE -->
+        <section class="catalogue section" id="catalogue">
+
+            <div class="container">
+
+                <div class="section-heading">
+                    <p class="section-label">NOTRE SÉLECTION</p>
+                    <h2>Découvrez nos produits</h2>
+                    <p>Recherchez et trouvez votre prochain coup de cœur.</p>
+                </div>
+
+                <!-- RECHERCHE ET FILTRES -->
+                <div class="filters">
+
+                    <input
+                        type="search"
+                        id="search-input"
+                        placeholder="Rechercher un produit..."
+                        aria-label="Rechercher un produit"
+                    >
+
+                    <select id="category-filter" aria-label="Filtrer par catégorie">
+                        <option value="all">Toutes les catégories</option>
+                        <option value="electronique">Électronique</option>
+                        <option value="mode">Mode</option>
+                        <option value="maison">Maison</option>
+                        <option value="accessoires">Accessoires</option>
+                    </select>
+
+                </div>
+
+                <!-- NOMBRE DE PRODUITS -->
+                <p class="products-count" id="products-count"></p>
+
+                <!-- LES PRODUITS SERONT AJOUTÉS PAR JAVASCRIPT -->
+                <div class="products-grid" id="products-grid"></div>
+
+                <!-- MESSAGE SI AUCUN PRODUIT NE CORRESPOND -->
+                <p class="no-results" id="no-results" hidden>
+                    Aucun résultat. Essayez une autre recherche.
+                </p>
+
+            </div>
+
+        </section>
+
+        <!-- PANIER LATÉRAL -->
+        <div class="cart-overlay" id="cart-overlay" hidden></div>
+
+        <aside
+            class="cart-panel"
+            id="cart-panel"
+            aria-label="Mon panier"
+            aria-hidden="true"
+            inert
+        >
+
+            <div class="cart-header">
+                <h2>Mon panier 🛒</h2>
+
+                <button
+                    id="close-cart"
+                    class="close-cart"
+                    type="button"
+                    aria-label="Fermer le panier"
+                >
+                    ✕
+                </button>
+            </div>
+
+            <div id="cart-items" class="cart-items"></div>
+
+            <p id="empty-cart" class="empty-cart">
+                Ton panier est vide pour le moment.
+            </p>
+
+            <div class="cart-summary">
+                <p>
+                    Sous-total :
+                    <span id="cart-subtotal">0 FCFA</span>
+                </p>
+
+                <p>
+                    Livraison :
+                    <span id="delivery-fee">0 FCFA</span>
+                </p>
+
+                <h3>
+                    Total :
+                    <span id="cart-total">0 FCFA</span>
+                </h3>
+
+                <button id="checkout-button" class="checkout-button" type="button">
+                    Passer la commande
+                </button>
+            </div>
+
+        </aside>
+
+        <!-- COMMANDE SIMULÉE -->
+        <dialog id="checkout-dialog" class="checkout-dialog">
+
+            <div class="dialog-header">
+                <h2>Finaliser ma commande</h2>
+
+                <button
+                    id="close-checkout"
+                    type="button"
+                    aria-label="Fermer"
+                >
+                    ✕
+                </button>
+            </div>
+
+            <form id="checkout-form">
+
+                <label for="customer-name">Nom complet</label>
+                <input
+                    type="text"
+                    id="customer-name"
+                    name="customerName"
+                    required
+                    minlength="2"
+                    autocomplete="name"
+                >
+
+                <label for="customer-phone">Téléphone</label>
+                <input
+                    type="tel"
+                    id="customer-phone"
+                    name="customerPhone"
+                    required
+                    autocomplete="tel"
+                >
+
+                <label for="customer-address">Adresse de livraison</label>
+                <textarea
+                    id="customer-address"
+                    name="customerAddress"
+                    required
+                    minlength="5"
+                    autocomplete="street-address"
+                ></textarea>
+
+                <div id="order-summary" class="order-summary"></div>
+
+                <button class="checkout-button" type="submit">
+                    Confirmer la commande simulée
+                </button>
+
+            </form>
+
+            <p id="order-message" role="status"></p>
+
+        </dialog>
+
+    </main>
+
+    <!-- PIED DE PAGE -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2026 SmartShop — Tous droits réservés.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
